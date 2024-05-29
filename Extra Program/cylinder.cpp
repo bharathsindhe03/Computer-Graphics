@@ -1,36 +1,38 @@
-#include <GL/glut.h>
-#include <cmath>
+#include<glut.h>
+#include<math.h>
+void myinit()
+{
+	gluOrtho2D(-100, 100, -100, 100);
+}
+void display()
+{
+	glClearColor(1, 1, 1, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+	int i;
+	double angle;
+	glColor3f(0, 0, 1);
+	int j;
+	for (j = 0; j < 50; j++)
+	{
 
-void init() {
-    gluOrtho2D(0, 400, 0, 400);
+		glBegin(GL_LINES);
+		for (i = 0; i <= 12; i++)
+		{
+			angle = 3.14 / 6 * i;
+			glVertex2f(10 * cos(angle), j + 10 * sin(angle));
+		}
+	}
+	glEnd();
+	glFlush();
 }
 
-void display() {
-    glClearColor(1, 1, 1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1, 0, 0);
-    glPointSize(5);
-
-    glBegin(GL_POINTS);
-    for (int i = 0; i < 50; i++) {
-        for (int j = 0; j < 36; j++) {
-            double angle = j * 3.14159265 / 18;
-            glVertex2f(200 + 50 * cos(angle), i * 7 + 50 * sin(angle));
-        }
-    }
-    glEnd();
-    glFlush();
-}
-
-int main(int argc, char** argv) {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(500, 500);
-    glutInitWindowPosition(100, 100);
-    glutCreateWindow("Cylinder");
-    init();
-    glutDisplayFunc(display);
-    glutMainLoop();
-
-    return 0;
+void main()
+{
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(500, 500);
+	glutInitWindowPosition(100, 100);
+	glutCreateWindow("Displaying circle:");
+	myinit();
+	glutDisplayFunc(display);
+	glutMainLoop();
 }
